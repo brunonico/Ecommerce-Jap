@@ -1,0 +1,11 @@
+.container {
+  border: black solid ;
+  background: rgba(24,24,27, 0.6);
+  color: white;
+}
+
+body {
+  background-image: url("C:/Users/Bruno/Desktop/jap/proyecto/Ecommerce-Jap/img/screenLogin.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
