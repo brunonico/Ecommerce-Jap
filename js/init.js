@@ -51,7 +51,21 @@ document.addEventListener("DOMContentLoaded", function (e) {
   let savedName = localStorage.getItem("inputName");
 
   let insertName = "";
-  insertName = `<a class="py-2 d-none d-md-inline-block" href="#">${savedName}</a>`
+  insertName = ` <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  ${savedName}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+    <a class="dropdown-item" href="index.html" id="logout">Cerrar sesión</a>
+  </div>
+</div>` 
+
+  //<a class="py-2 d-none d-md-inline-block" href="my-profile.html"></a>`
 
   document.getElementById("logeo").innerHTML = insertName;
+
+  document.getElementById("logout").onclick = function() { 
+    localStorage.clear(); 
+  }
 });
