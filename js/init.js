@@ -49,9 +49,11 @@ var getJSONData = function (url) {
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
   let savedName = localStorage.getItem("inputName");
+  let savedGoogleName = localStorage.getItem("profile")
 
   let insertName = "";
-  insertName = ` <div class="dropdown">
+  if (savedName != "") {
+    insertName = ` <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   ${savedName}
   </button>
@@ -59,13 +61,23 @@ document.addEventListener("DOMContentLoaded", function (e) {
     <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
     <a class="dropdown-item" href="index.html" id="logout">Cerrar sesión</a>
   </div>
-</div>` 
+</div>` } else {
+  insertName = ` <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  ${savedGoogleName}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+    <a class="dropdown-item" href="index.html" id="logout">Cerrar sesión</a>
+  </div>
+</div>`
+}
 
   //<a class="py-2 d-none d-md-inline-block" href="my-profile.html"></a>`
 
   document.getElementById("logeo").innerHTML = insertName;
 
-  document.getElementById("logout").onclick = function() { 
-    localStorage.clear(); 
+  document.getElementById("logout").onclick = function () {
+    localStorage.clear();
   }
 });
