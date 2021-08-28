@@ -1,7 +1,7 @@
 let minPrice = undefined;
 let maxPrice = undefined;
 var currentProductsArray = [];
-
+let searchProd = undefined;
 var currentSortCriteriaProducts = undefined;
 const ORDER_ASC_BY_PRICE = "^USD";
 const ORDER_DESC_BY_PRICE = "USD";
@@ -50,14 +50,14 @@ function sortAndShowProducts(sortCriteria, productsArray) {
 
 
 function showProducts(arreglo) {
-
+    
     let content = "";
     for (let i = 0; i < arreglo.length; i++) {
         let products = arreglo[i];
 
-
         if (((minPrice == undefined) || (minPrice != undefined && parseInt(products.cost) >= minPrice))
             && ((maxPrice == undefined) || (maxPrice != undefined && parseInt(products.cost) <= maxPrice))) {
+
             content +=
                 `<div class="list-group-item list-group-item-action">
                 <div class="row">
@@ -78,10 +78,9 @@ function showProducts(arreglo) {
             </div>
             <br>
                 `
-
         }
+        document.getElementById("prod-list-container").innerHTML = content;
     }
-    document.getElementById("prod-list-container").innerHTML = content;
 }
 
 
@@ -94,10 +93,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
         .then((data) => {
             productsArray = data;
 
-            sortAndShowProducts(ORDER_ASC_BY_PRICE , productsArray);
+            sortAndShowProducts(ORDER_ASC_BY_PRICE, productsArray);
         });
-
-
 
     document.getElementById("sortAscPrice").addEventListener("click", function () {
         sortAndShowProducts(ORDER_ASC_BY_PRICE);
@@ -138,6 +135,19 @@ document.addEventListener("DOMContentLoaded", function (e) {
         maxPrice = undefined;
 
         showProducts(productsArray);
+    });
+
+
+
+    document.getElementById("search").addEventListener("keyup", (e) => {
+        function searched() {
+            searchProd = document.getElementById("search").value.toLowerCase();
+            if (searchProd != undefined) {
+                showProducts(productsArray.filter(prod => 
+                    { return (prod.name.toLowerCase().includes(searchProd) || prod.description.toLowerCase().includes(searchProd)) }))
+            }
+        }
+        searched();
     });
 
 });
