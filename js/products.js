@@ -38,13 +38,12 @@ function sortProducts(criteria, array) {
 }
 
 function sortAndShowProducts(sortCriteria, productsArray) {
-    currentSortCriteriaProducts = sortCriteria;
-
+    
     if (productsArray != undefined) {
         currentProductsArray = productsArray;
     }
 
-    currentProductsArray = sortProducts(currentSortCriteriaProducts, currentProductsArray);
+    currentProductsArray = sortProducts(sortCriteria, currentProductsArray);
 
 
     showProducts(currentProductsArray);

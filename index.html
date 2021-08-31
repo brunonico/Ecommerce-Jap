@@ -14,7 +14,8 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="img/logo.jpg">
   <meta name="google-signin-scope" content="profile email">
-  <meta name="google-signin-client_id" content="342264758681-el6pfck9em3m9prp7lf622oq6tq0pbtc.apps.googleusercontent.com">
+  <meta name="google-signin-client_id"
+    content="342264758681-el6pfck9em3m9prp7lf622oq6tq0pbtc.apps.googleusercontent.com">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
 
   <style>
@@ -61,22 +62,20 @@
       <input type="checkbox" required> Clicking here, you agree on our <a href="#">terms and condition</a>.
     </label>
     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" id="googleBtn"></div>
-    
+
     <script>
       function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
         var profile = googleUser.getBasicProfile();
         console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        let nameGoogle = profile.getName();
         console.log('Given Name: ' + profile.getGivenName());
         console.log('Family Name: ' + profile.getFamilyName());
         console.log("Image URL: " + profile.getImageUrl());
         console.log("Email: " + profile.getEmail());
-        localStorage.setItem ("profile", nameGoogle);
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
-        window.location ="home.html";
+        window.location = "home.html";
       }
     </script>
     <br>
