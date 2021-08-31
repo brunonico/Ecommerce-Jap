@@ -1,11 +1,13 @@
 let minPrice = undefined;
 let maxPrice = undefined;
+
 var currentProductsArray = [];
-let searchProd = undefined;
 var currentSortCriteriaProducts = undefined;
 const ORDER_ASC_BY_PRICE = "^USD";
 const ORDER_DESC_BY_PRICE = "USD";
 const ORDER_BY_PROD_SALES = "Relevancia.";
+
+let searchProd = undefined;
 
 function sortProducts(criteria, array) {
     let results = [];
@@ -50,16 +52,19 @@ function sortAndShowProducts(sortCriteria, productsArray) {
 
 
 function showProducts(arreglo) {
-    
+
     let content = "";
-    for (let i = 0; i < arreglo.length; i++) {
-        let products = arreglo[i];
+    if (arreglo.length == 0) {
+        document.getElementById("prod-list-container").innerHTML = null;
+    } else {
+        for (let i = 0; i < arreglo.length; i++) {
+            let products = arreglo[i];
 
-        if (((minPrice == undefined) || (minPrice != undefined && parseInt(products.cost) >= minPrice))
-            && ((maxPrice == undefined) || (maxPrice != undefined && parseInt(products.cost) <= maxPrice))) {
+            if (((minPrice == undefined) || (minPrice != undefined && parseInt(products.cost) >= minPrice))
+                && ((maxPrice == undefined) || (maxPrice != undefined && parseInt(products.cost) <= maxPrice))) {
 
-            content +=
-                `<div class="list-group-item list-group-item-action">
+                content +=
+                    `<div class="list-group-item list-group-item-action">
                 <div class="row">
                 <div class="col-3">
                     <img src="` + products.imgSrc + `" alt="` + products.description + `" class="img-thumbnail">
@@ -78,8 +83,10 @@ function showProducts(arreglo) {
             </div>
             <br>
                 `
+            }
+
+            document.getElementById("prod-list-container").innerHTML = content;
         }
-        document.getElementById("prod-list-container").innerHTML = content;
     }
 }
 
@@ -138,16 +145,24 @@ document.addEventListener("DOMContentLoaded", function (e) {
     });
 
 
-
     document.getElementById("search").addEventListener("keyup", (e) => {
-        function searched() {
-            searchProd = document.getElementById("search").value.toLowerCase();
-            if (searchProd != undefined) {
-                showProducts(productsArray.filter(prod => 
-                    { return (prod.name.toLowerCase().includes(searchProd) || prod.description.toLowerCase().includes(searchProd)) }))
-            }
-        }
-        searched();
+        searchProd = document.getElementById("search").value;
+
+        searched(searchProd, productsArray)
+
     });
 
 });
+
+
+
+
+function searched(a, b) {
+    let newArray = [];
+    b.forEach(element => {
+        if (element.name.toLowerCase().indexOf(a) != -1 || element.description.toLowerCase().indexOf(a) != -1) {
+            newArray.push(element);
+        }
+    });
+    showProducts(newArray);
+}
