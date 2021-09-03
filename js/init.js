@@ -49,32 +49,33 @@ var getJSONData = function (url) {
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
   let savedName = localStorage.getItem("inputName");
-  
+  let googleSavedName = localStorage.getItem("googleName");
+
+  console.log(googleSavedName);
+
   let insertName = "";
-  if (profile.getName != null) {
+  if (googleSavedName != null) {
     insertName = ` <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" 
                   id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  ${getName}  
+                  ${googleSavedName}
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
                   <a class="dropdown-item" href="index.html" id="logout">Cerrar sesión</a>
                   </div>
-                  </div>` } else {
+                  </div>`} else {
     insertName = ` <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" 
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ${savedName}
-                                   </button>
-                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                  <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
-                                  <a class="dropdown-item" href="index.html" id="logout">Cerrar sesión</a>
-                                    </div>
-                                  </div>`
+                    <button class="btn btn-secondary dropdown-toggle" type="button" 
+                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ${savedName}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+                    <a class="dropdown-item" href="index.html" id="logout">Cerrar sesión</a>
+                    </div>
+                    </div>`
   }
-
-  //<a class="py-2 d-none d-md-inline-block" href="my-profile.html"></a>`
 
   document.getElementById("logeo").innerHTML = insertName;
 
