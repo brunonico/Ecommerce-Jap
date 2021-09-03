@@ -49,14 +49,13 @@ var getJSONData = function (url) {
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
   let savedName = localStorage.getItem("inputName");
-  let savedGoogleName = localStorage.getItem("profile")
-
+  
   let insertName = "";
-  if (savedName != "") {
+  if (profile.getName != null) {
     insertName = ` <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" 
                   id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  ${savedName}
+                  ${getName}  
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
@@ -66,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     insertName = ` <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" 
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ${savedGoogleName}
+                                    ${savedName}
                                    </button>
                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                   <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
