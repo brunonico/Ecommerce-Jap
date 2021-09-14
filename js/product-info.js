@@ -1,6 +1,12 @@
 let commentArray = [];
 let yourName = localStorage.getItem("inputName");
-document.getElementById("yourName").innerHTML = yourName;
+
+let googleForComment = localStorage.getItem("googleName")
+
+if (googleForComment != null) {
+    document.getElementById("yourName").innerHTML = googleForComment;
+} else { document.getElementById("yourName").innerHTML = yourName; };
+
 
 document.addEventListener("DOMContentLoaded", function (e) {
     fetch(PRODUCT_INFO_URL)
@@ -71,7 +77,6 @@ function showInfo(arreglo) {
 
 function showComments(anArray) {
     let commentContent = "";
-    let googleForComment = localStorage.getItem("googleName")
 
     anArray.forEach(function (comment) {
         let calification = "";
