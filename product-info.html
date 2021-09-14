@@ -13,6 +13,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link href="css/product-info.css" rel="stylesheet">
 </head>
 
 <body>
@@ -26,35 +27,88 @@
       <div id="logeo"></div>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 3 (Fecha de entrega: 19/09/2021) y Entrega 4 (Fecha de entrega: 03/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+  <div class="container mt-5">
+    <div class="text-center p-4">
+      <h2>Información de los productos</h2>
+      <p class="lead">Estos son los detalles del producto seleccionado</p>
+      <p class="small alert-warning py-3"><strong>Nota: </strong>por simplicidad, cualquiera sea el producto
+        seleccionado previamente, siempre se visualizará el presente: <strong>Chevrolet Onix Joy</strong>.</p>
     </div>
-  </div>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-right">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de Desarrollo Web - JAP - 2021</p>
-      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+    <div class="container p-4">
+      <div class="row"></div>
+      <div class="list-group" id="productInfoContainer"></div>
     </div>
-  </footer>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+
+    <div class="container p-4">
+      <h2 class="text-center p-4">Reseñas sobre el producto</h2>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col" id="productInfoContainer">
+          </div>
+        </div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col" id="commentContainer">
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col" id="addComment">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col" id="newComment">
+            <p>Ingresa tu comentario <span class="font-weight-bold" id="yourName">,</span>, ¡nos interesa tu opinión!</p>
+           <div class="d-flex w-100 justify-content-between"> <p>¿Qué calificación merece el producto?</p>
+            <form>
+              <p class="clasificacion">
+                <input class="radios" id="radio1" type="radio" name="stars" value="5">
+                <label for="radio1">★</label>
+                <input class="radios" id="radio2" type="radio" name="stars" value="4">
+                <label for="radio2">★</label>
+                <input class="radios" id="radio3" type="radio" name="stars" value="3">
+                <label for="radio3">★</label>
+                <input class="radios" id="radio4" type="radio" name="stars" value="2">
+                <label for="radio4">★</label>
+                <input class="radios" id="radio5" type="radio" name="stars" value="1">
+                <label for="radio5">★</label>
+              </p>
+            </form>
+            </div>
+            <textarea name="commentary" id="commentary" cols="125" rows="5"></textarea>
+            <br>
+            
+            
+            <button type="button" class="btn btn-success" id="sendComment">Enviar</button>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </div>
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/product-info.js"></script>
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Volver arriba</a>
+        </p>
+        <p>Este sitio forma parte de Desarrollo Web - JAP - 2021</p>
+        <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+      </div>
+    </footer>
+    <div id="spinner-wrapper">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/product-info.js"></script>
 </body>
 
 </html>

@@ -50,9 +50,6 @@ var getJSONData = function (url) {
 document.addEventListener("DOMContentLoaded", function (e) {
   let savedName = localStorage.getItem("inputName");
   let googleSavedName = localStorage.getItem("googleName");
-
-  console.log(googleSavedName);
-
   let insertName = "";
   if (googleSavedName != null) {
     insertName = ` <div class="dropdown">
