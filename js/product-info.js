@@ -65,38 +65,47 @@ function showInfo(arreglo) {
         <p class="text-center">**`+ arreglo.cost + " " + arreglo.currency + `**</p>
         <br>        </div>                </div>
 
-    `  
+    `
     document.getElementById("productInfoContainer").innerHTML = infoContent;
 }
 
 function showComments(anArray) {
     let commentContent = "";
+    let googleForComment = localStorage.getItem("googleName")
 
     anArray.forEach(function (comment) {
         let calification = "";
-        commentContent +=
-            ` <sub>` + comment.dateTime + `</sub>
+        if (googleForComment != null) {
+            commentContent +=
+                ` <sub>` + comment.dateTime + `</sub>
+              <p class="font-weight-bold">` + googleForComment + `</p>
+              <p>` + addStars(comment.score, calification) + `</p>
+              <p>` + comment.description + `</p> <hr>`;
+        } else {
+            commentContent +=
+                ` <sub>` + comment.dateTime + `</sub>
               <p class="font-weight-bold">` + comment.user + `</p>
               <p>` + addStars(comment.score, calification) + `</p>
               <p>` + comment.description + `</p> <hr>`;
+        }
     });
     document.getElementById("commentContainer").innerHTML = commentContent;
 }
 
 document.getElementById("sendComment").onclick = function () {
     let d = new Date();
-    let dateOfTheComment = d.getFullYear() + "-" + (d.getMonth() <= 9 ? "0" + d.getMonth() : d.getMonth()) + "-" + (d.getDay() <= 9 ? "0" + d.getDay() : d.getDay()) + " " + (d.getHours() <=9 ? "0" + d.getHours():d.getHours()) + ":" + d.getMinutes() + ":" + d.getSeconds();
+    let dateOfTheComment = d.getFullYear() + "-" + (d.getMonth() <= 9 ? "0" + d.getMonth() : d.getMonth()) + "-" + (d.getDay() <= 9 ? "0" + d.getDay() : d.getDay()) + " " + (d.getHours() <= 9 ? "0" + d.getHours() : d.getHours()) + ":" + d.getMinutes() + ":" + d.getSeconds();
     let commentary = document.getElementById("commentary").value;
     let commentName = localStorage.getItem("inputName");
     let radioValue = document.querySelector('input[name=stars]:checked');
-    radioValue != null ? radioValue = radioValue.value :  alert('Publicado sin calificación');
-    
+    radioValue != null ? radioValue = radioValue.value : alert('Publicado sin calificación');
+
     let commentStars = "";
- 
+
     let newCommentary = "";
     newCommentary = ` <sub>` + dateOfTheComment + `</sub>
     <p class="font-weight-bold">` + commentName + `</p>
-    <p> `+  addStars(radioValue, commentStars) +` </p>
+    <p> `+ addStars(radioValue, commentStars) + ` </p>
     <p>` + commentary + `</p> <hr>
     <div class="col" id="addComment">`
         ;
@@ -106,12 +115,12 @@ document.getElementById("sendComment").onclick = function () {
 
 }
 
-function addStars(amount,textToAppend){
+function addStars(amount, textToAppend) {
     for (let i = 1; i <= amount; i++) {
         textToAppend += `<span class = "fa fa-star checked"></span>`;
     }
     for (let i = amount; i <= 4; i++) {
         textToAppend += `<span class = "fa fa-star"></span>`;
-    } ; 
+    };
     return textToAppend;
 }
