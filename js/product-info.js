@@ -80,20 +80,12 @@ function showComments(anArray) {
 
     anArray.forEach(function (comment) {
         let calification = "";
-        if (googleForComment != null) {
-            commentContent +=
-                ` <sub>` + comment.dateTime + `</sub>
-              <p class="font-weight-bold">` + googleForComment + `</p>
-              <p>` + addStars(comment.score, calification) + `</p>
-              <p>` + comment.description + `</p> <hr>`;
-        } else {
             commentContent +=
                 ` <sub>` + comment.dateTime + `</sub>
               <p class="font-weight-bold">` + comment.user + `</p>
               <p>` + addStars(comment.score, calification) + `</p>
               <p>` + comment.description + `</p> <hr>`;
-        }
-    });
+        });
     document.getElementById("commentContainer").innerHTML = commentContent;
 }
 
@@ -108,12 +100,18 @@ document.getElementById("sendComment").onclick = function () {
     let commentStars = "";
 
     let newCommentary = "";
+    if (googleForComment != null) {
+        newCommentary +=
+            ` <sub>` + comment.dateTime + `</sub>
+          <p class="font-weight-bold">` + googleForComment + `</p>
+          <p>` + addStars(comment.score, calification) + `</p>
+          <p>` + comment.description + `</p> <hr>`;
+    } else {
     newCommentary = ` <sub>` + dateOfTheComment + `</sub>
     <p class="font-weight-bold">` + commentName + `</p>
     <p> `+ addStars(radioValue, commentStars) + ` </p>
     <p>` + commentary + `</p> <hr>
-    <div class="col" id="addComment">`
-        ;
+    <div class="col" id="addComment">`};
 
     document.getElementById("addComment").innerHTML = newCommentary;
     document.getElementById("commentary").value = "";
