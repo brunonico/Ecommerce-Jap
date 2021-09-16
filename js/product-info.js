@@ -102,10 +102,10 @@ document.getElementById("sendComment").onclick = function () {
     let newCommentary = "";
     if (googleForComment != null) {
         newCommentary +=
-            ` <sub>` + comment.dateTime + `</sub>
+            ` <sub>` + dateOfTheComment + `</sub>
           <p class="font-weight-bold">` + googleForComment + `</p>
-          <p>` + addStars(comment.score, calification) + `</p>
-          <p>` + comment.description + `</p> <hr>`;
+          <p>` + addStars(radioValue, commentStars) + `</p>
+          <p>` + commentary + `</p> <hr>`;
     } else {
     newCommentary = ` <sub>` + dateOfTheComment + `</sub>
     <p class="font-weight-bold">` + commentName + `</p>
