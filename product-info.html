@@ -23,8 +23,16 @@
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-      <div id="logeo"></div>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a href="cart.html" class="dropdown-item">Ver mi carrito</a>
+          <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+          <a class="dropdown-item" href="index.html" id="logout">Cerrar sesión</a>
+        </div>
+      </div>
     </div>
   </nav>
   <div class="container mt-5">
@@ -35,57 +43,100 @@
         seleccionado previamente, siempre se visualizará el presente: <strong>Chevrolet Onix Joy</strong>.</p>
     </div>
     <div class="container p-4">
-      <div class="row"></div>
-      <div class="list-group" id="productInfoContainer"></div>
-    </div>
-
-    <div class="container p-4">
-      <h2 class="text-center p-4">Reseñas sobre el producto</h2>
       <div class="container-fluid">
         <div class="row">
           <div class="col" id="productInfoContainer">
-          </div>
-        </div>
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col" id="commentContainer">
+            <div class="d-flex w-100 justify-content-between">
+              <h1 id="arrayName"></h1>
+              <h1>Categoría: <a id="arrayCategory" href="categories.html"></a></h1>
             </div>
-          </div>
-        </div>
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col" id="addComment">
-            </div>
-          </div>
-        </div>
+            <hr>
+            <div style="margin:auto">
+              <div id="carrousel-images" class="carousel slide carousel-fade" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img id="carouselActive" src="" class="d-block w-100" alt="Chevrolet Onix">
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carrousel-images" role="button" data-slide="prev">
+                  <span class="fas fa-angle-double-left fa-5x" aria-hidden="true"></span>
+                  <span class="sr-only">Prev</span>
+                </a>
+                <a class="carousel-control-next" href="#carrousel-images" role="button" data-slide="next">
+                  <span class="fas fa-angle-double-right fa-5x" aria-hidden="true"></span>
 
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+            </div>
+            <br>
+            <hr>
+            <h2><strong>Descripción</strong></h2>
+            <hr>
+            <p id="arrayDescription"></p>
+            <h3> <span id="arraySoldCount"></span> unidades vendidas.<h3>
+                <p>¡La tuya podría ser la próxima!</p> <br>
+                <div class="alert-success" role="alert"> <br>
+                  <h2 class="alert-heading text-center">Precio 0km, modelo 2012</h2>
+                  <p class="text-center" id="arrayPrice"></p>
+                  <p class="text-center"><a class="fas fa-shopping-cart" href="cart.html" style="color:black ">Agregar
+                      al carrito</a> </p>
+                  <br>
+                </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container-fluid">
+        <h2 class="text-center p-4">Reseñas sobre el producto</h2>
+        <div class="row">
+          <div class="col" id="commentContainer">
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col" id="addComment">
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
         <div class="row">
           <div class="col" id="newComment">
-            <p>Ingresa tu comentario <span class="font-weight-bold" id="yourName">,</span>, ¡nos interesa tu opinión!</p>
-           <div class="d-flex w-100 justify-content-between"> <p>¿Qué calificación merece el producto?</p>
-            <form>
-              <p class="clasificacion">
-                <input class="radios" id="radio1" type="radio" name="stars" value="5">
-                <label for="radio1">★</label>
-                <input class="radios" id="radio2" type="radio" name="stars" value="4">
-                <label for="radio2">★</label>
-                <input class="radios" id="radio3" type="radio" name="stars" value="3">
-                <label for="radio3">★</label>
-                <input class="radios" id="radio4" type="radio" name="stars" value="2">
-                <label for="radio4">★</label>
-                <input class="radios" id="radio5" type="radio" name="stars" value="1">
-                <label for="radio5">★</label>
-              </p>
-            </form>
+            <p>Ingresa tu comentario <span class="font-weight-bold" id="yourName">,</span>, ¡nos interesa tu
+              opinión!
+            </p>
+            <div class="d-flex w-100 justify-content-between">
+              <p>¿Qué calificación merece el producto?</p>
+              <form>
+                <p class="clasificacion">
+                  <input class="radios" id="radio1" type="radio" name="stars" value="5">
+                  <label for="radio1">★</label>
+                  <input class="radios" id="radio2" type="radio" name="stars" value="4">
+                  <label for="radio2">★</label>
+                  <input class="radios" id="radio3" type="radio" name="stars" value="3">
+                  <label for="radio3">★</label>
+                  <input class="radios" id="radio4" type="radio" name="stars" value="2">
+                  <label for="radio4">★</label>
+                  <input class="radios" id="radio5" type="radio" name="stars" value="1">
+                  <label for="radio5">★</label>
+                </p>
+              </form>
             </div>
             <textarea name="commentary" id="commentary" cols="125" rows="5"></textarea>
             <br>
-            
-            
+
+
             <button type="button" class="btn btn-success" id="sendComment">Enviar</button>
           </div>
         </div>
+      </div>
+      <div class="container-fluid">
+        <h2 class="text-left p-4">Productos relacionados</h2>
+        <div class="card-deck" id="relatedProducts">
 
+        </div>
       </div>
     </div>
     <footer class="text-muted">

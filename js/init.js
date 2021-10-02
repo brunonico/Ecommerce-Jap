@@ -42,40 +42,15 @@ var getJSONData = function (url) {
 }
 
 
+//acorte lineas en el init js al pasar código al html. Queda más prolijo ya que ahora solamente es necesario insertar uno de los dos nombres guardados.
 
-
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
   let savedName = localStorage.getItem("inputName");
   let googleSavedName = localStorage.getItem("googleName");
-  let insertName = "";
-  if (googleSavedName != null) {
-    insertName = ` <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" 
-                  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  ${googleSavedName}
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
-                  <a class="dropdown-item" href="index.html" id="logout">Cerrar sesión</a>
-                  </div>
-                  </div>`} else {
-    insertName = ` <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" 
-                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    ${savedName}
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
-                    <a class="dropdown-item" href="index.html" id="logout">Cerrar sesión</a>
-                    </div>
-                    </div>`
-  }
-
-  document.getElementById("logeo").innerHTML = insertName;
-
+  let insertName = "";  
+  googleSavedName != null ? insertName=googleSavedName : insertName=savedName;
+  savedName == null ? insertName ="No ha ingresado usuario" : insertName=savedName;
+  document.getElementById("dropdownMenuButton").innerHTML = insertName;
   document.getElementById("logout").onclick = function () {
     localStorage.clear();
   }

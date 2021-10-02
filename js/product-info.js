@@ -1,11 +1,9 @@
 let commentArray = [];
 let yourName = localStorage.getItem("inputName");
+let googleForComment = localStorage.getItem("googleName");
+let relatedProductsArray = [];
 
-let googleForComment = localStorage.getItem("googleName")
-
-if (googleForComment != null) {
-    document.getElementById("yourName").innerHTML = googleForComment;
-} else { document.getElementById("yourName").innerHTML = yourName; };
+googleForComment != null ? document.getElementById("yourName").innerHTML = googleForComment : document.getElementById("yourName").innerHTML = yourName;
 
 
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -13,6 +11,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
         .then(response => response.json())
         .then((data) => {
             showInfo(data)
+            fetch(PRODUCTS_URL)
+                .then(res => res.json())
+                .then((dataProd) => {
+                    showRelatedProducts(data, dataProd)
+                })
         })
 });
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -23,56 +26,25 @@ document.addEventListener("DOMContentLoaded", function (e) {
         })
 });
 
+
 function showInfo(arreglo) {
     let infoContent = "";
 
-    infoContent += `
-    <div class="container-fluid"> 
-        <div class="d-flex w-100 justify-content-between">
-            <h1>`+ arreglo.name + ` </h1>
-            <h1> Categoría <a href="category-info.html">` + arreglo.category + ` </a></h1>
-        </div>
-        <hr>
-        <div style="padding-right: 20rem">
-            <div id="carrousel-images" class="carousel slide carousel-fade" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="`+ arreglo.images[0] + `" class="d-block w-100" alt="Chevrolet Onix">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="`+ arreglo.images[1] + `" class="d-block w-100" alt="Chevrolet Onix">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="`+ arreglo.images[2] + `" class="d-block w-100" alt="Chevrolet Onix">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="`+ arreglo.images[3] + `" class="d-block w-100" alt="Chevrolet Onix">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="`+ arreglo.images[4] + `" class="d-block w-100" alt="Chevrolet Onix">
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carrousel-images" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Prev</span>
-                </a>
-                <a class="carousel-control-next" href="#carrousel-images" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </div>        <br>        <hr>
-        <h2><strong>Descripción</strong></h2>        <hr>
-        <p>`+ arreglo.description + `</p>
-        <h3>`+ arreglo.soldCount + ` unidades vendidas.<h3>
-        <p>¡La tuya podría ser la próxima!</p>        <br>
-        <div class="alert-success" role="alert">        <br>
-        <h2 class="alert-heading text-center">Precio 0km, modelo 2012</h2>
-        <p class="text-center">**`+ arreglo.cost + " " + arreglo.currency + `**</p>
-        <br>        </div>                </div>
+    $("#arrayName").append(arreglo.name);
+    $("#arrayCategory").append(arreglo.category)
+    $("#carouselActive").attr("src", arreglo.images[0])
 
-    `
-    document.getElementById("productInfoContainer").innerHTML = infoContent;
+    for (let i = 1; i < arreglo.images.length; i++) {
+        infoContent += `<div class="carousel-item">
+                            <img src="`+ arreglo.images[i] + `" class="d-block w-100" alt="Chevrolet Onix">
+                        </div> `
+    };
+
+    $(".carousel-inner").append(infoContent);
+    $("#arrayDescription").append(arreglo.description);
+    $("#arraySoldCount").append(arreglo.soldCount);
+    $("#arrayPrice").append("****" + arreglo.cost + " " + arreglo.currency + "****")
+
 }
 
 function showComments(anArray) {
@@ -80,16 +52,16 @@ function showComments(anArray) {
 
     anArray.forEach(function (comment) {
         let calification = "";
-            commentContent +=
-                ` <sub>` + comment.dateTime + `</sub>
+        commentContent +=
+            ` <sub>` + comment.dateTime + `</sub>
               <p class="font-weight-bold">` + comment.user + `</p>
               <p>` + addStars(comment.score, calification) + `</p>
               <p>` + comment.description + `</p> <hr>`;
-        });
+    });
     document.getElementById("commentContainer").innerHTML = commentContent;
 }
 
-document.getElementById("sendComment").onclick = function () {
+$("#sendComment").click(function () {
     let d = new Date();
     let dateOfTheComment = d.getFullYear() + "-" + (d.getMonth() <= 9 ? "0" + d.getMonth() : d.getMonth()) + "-" + (d.getDay() <= 9 ? "0" + d.getDay() : d.getDay()) + " " + (d.getHours() <= 9 ? "0" + d.getHours() : d.getHours()) + ":" + d.getMinutes() + ":" + d.getSeconds();
     let commentary = document.getElementById("commentary").value;
@@ -103,20 +75,22 @@ document.getElementById("sendComment").onclick = function () {
     if (googleForComment != null) {
         newCommentary +=
             ` <sub>` + dateOfTheComment + `</sub>
-          <p class="font-weight-bold">` + googleForComment + `</p>
-          <p>` + addStars(radioValue, commentStars) + `</p>
-          <p>` + commentary + `</p> <hr>`;
+                <p class="font-weight-bold">` + googleForComment + `</p>
+                <p>` + addStars(radioValue, commentStars) + `</p>
+                <p>` + commentary + `</p> <hr>`;
     } else {
-    newCommentary = ` <sub>` + dateOfTheComment + `</sub>
-    <p class="font-weight-bold">` + commentName + `</p>
-    <p> `+ addStars(radioValue, commentStars) + ` </p>
-    <p>` + commentary + `</p> <hr>
-    <div class="col" id="addComment">`};
+        newCommentary += ` <sub>` + dateOfTheComment + `</sub>
+                         <p class="font-weight-bold">` + commentName + `</p>
+                        <p> `+ addStars(radioValue, commentStars) + ` </p>
+                        <p>` + commentary + `</p> <hr>`
+    };
 
-    document.getElementById("addComment").innerHTML = newCommentary;
-    document.getElementById("commentary").value = "";
+    if (radioValue != null) {
+        $("#addComment").append(newCommentary)
+        $("#commentary").val(" ");
+    }
 
-}
+})
 
 function addStars(amount, textToAppend) {
     for (let i = 1; i <= amount; i++) {
@@ -126,4 +100,27 @@ function addStars(amount, textToAppend) {
         textToAppend += `<span class = "fa fa-star"></span>`;
     };
     return textToAppend;
+}
+
+function showRelatedProducts(data, dataProd) {
+    relatedProductsArray = data.relatedProducts;
+    let relatedProduct = "";
+
+    for (let i = 0; i <= dataProd.length; i++) {
+        if (relatedProductsArray.includes(i)) {
+            relatedProduct =
+                `<div class="card">
+                      <img class="card-img-top" src="  ${dataProd[i].imgSrc}">
+                      <div class="card-body">
+                          <h4 class="card-title"> ${dataProd[i].name} </h4>
+                          <p class="card-text">${dataProd[i].description}</p>
+                          <p class="card-text">USD ${dataProd[i].cost}</p> 
+                          <a class="fas fa-shopping-cart" href="cart.html" style="color:black ">Agregar</a> 
+                                                                    
+                      </div>
+                </div> `
+
+            $("#relatedProducts").append(relatedProduct);
+        }
+    }
 }
