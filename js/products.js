@@ -38,14 +38,7 @@ function sortProducts(criteria, array) {
 }
 
 function sortAndShowProducts(sortCriteria, productsArray) {
-    
-    if (productsArray != undefined) {
-        currentProductsArray = productsArray;
-    }
-
-    currentProductsArray = sortProducts(sortCriteria, currentProductsArray);
-
-
+    currentProductsArray = sortProducts(sortCriteria, productsArray);
     showProducts(currentProductsArray);
 }
 
@@ -63,7 +56,7 @@ function showProducts(arreglo) {
                 && ((maxPrice == undefined) || (maxPrice != undefined && parseInt(products.cost) <= maxPrice))) {
 
                 content +=
-                    `<a href= "product-info.html" class="list-group-item list-group-item-action">
+                    `<a href= "product-info.html?cost=` + products.cost + `" class="list-group-item list-group-item-action">
                 <div class="row">
                 <div class="col-3">
                     <img src="` + products.imgSrc + `" alt="` + products.description + `" class="img-thumbnail">
@@ -99,19 +92,19 @@ document.addEventListener("DOMContentLoaded", function (e) {
         .then((data) => {
             productsArray = data;
 
-            sortAndShowProducts(ORDER_ASC_BY_PRICE, productsArray);
+            showProducts(productsArray);
         });
 
     document.getElementById("sortAscPrice").addEventListener("click", function () {
-        sortAndShowProducts(ORDER_ASC_BY_PRICE);
+        sortAndShowProducts(ORDER_ASC_BY_PRICE, productsArray);
     });
 
     document.getElementById("sortDescPrice").addEventListener("click", function () {
-        sortAndShowProducts(ORDER_DESC_BY_PRICE);
+        sortAndShowProducts(ORDER_DESC_BY_PRICE, productsArray);
     });
 
     document.getElementById("sortBySales").addEventListener("click", function () {
-        sortAndShowProducts(ORDER_BY_PROD_SALES);
+        sortAndShowProducts(ORDER_BY_PROD_SALES, productsArray);
     });
     document.getElementById("filter").addEventListener("click", function () {
         minPrice = document.getElementById("minimum").value;

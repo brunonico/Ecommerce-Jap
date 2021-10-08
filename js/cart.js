@@ -12,5 +12,22 @@ document.addEventListener("DOMContentLoaded", function (e) {
 function showChart(param) {
     let articulo =  param.articles[0];
     
-    $("#cartImg").attr('src',articulo.src);
+    
+    let cartContent= `          
+    
+    
+    <tr>
+        <td>${articulo.name}</td>
+        <td><img class="d-block w-25 img-thumbnail" id="cartImg" src="${articulo.src}" alt="Card image cap"></td>
+        <td><input class="inputCount" type="number" value="${articulo.count}"></td>
+        <td>${articulo.unitCost} ${articulo.currency}</td>
+        <td>${articulo.unitCost*articulo.count} ${articulo.currency}</td>
+        <td><button href="#!" class="btn btn-danger">Borrar item</button></td>
+    </tr>`
+
+    $("#cartTable").append(cartContent);
+
+
+
+
 }

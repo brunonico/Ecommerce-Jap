@@ -27,7 +27,10 @@
         font-size: 3.5rem;
       }
     }
-    
+
+    input[type="number"] {
+      width: 50px;
+    }
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -53,37 +56,95 @@
       </div>
     </div>
   </nav>
+
   <div class="container p-5">
+
     <div class="text-center p-4">
       <h2>Mi carrito de compras</h2>
       <p class="lead">Estos son los artículos que seleccionaste</p>
     </div>
+
+
     <div class="container-fluid">
-      <div class="card">
-        <img class="d-block w-25" id="cartImg" src="" alt="Card image cap">
-        <div class="card-body">
-          <h4 class="card-title" id = "cartName">Nombre</h4>
-          <p class="card-text" id="cartCost">u$s 10</p>
-          <button href="#!" class="btn btn-danger">Borrar item</button>
-          <input type="number" value="2">
+
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Imagen</th>
+            <th>Cantidad</th>
+            <th>Costo unitario</th>
+            <th>Subtotal</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody id="cartTable">
+
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <div class="container-fluid">
+      <h5 class="mb-3">Elija su envío</h5>
+
+      <div class="d-block my-3">
+        <div class="custom-control custom-radio">
+          <input id="goldradio" name="shippingRadio" type="radio" class="custom-control-input" checked="" required="">
+          <label class="custom-control-label" for="goldradio">Gold (13%)</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input id="premiumradio" name="shippingRadio" type="radio" class="custom-control-input" required="">
+          <label class="custom-control-label" for="premiumradio">Premium (7%)</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input id="standardradio" name="shippingRadio" type="radio" class="custom-control-input" required="">
+          <label class="custom-control-label" for="standardradio">Estándar (3%)</label>
         </div>
       </div>
+    </div>
 
+    <hr class="mb-4">
+    <div class="container-fluid">
+      <h4 class="mb-3">Costos</h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Precio</h6>
+            <small class="text-muted">Unitario del producto</small>
+          </div>
+          <span class="text-muted" id="productCostText">-</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">P0rcentaje</h6>
+            <small class="text-muted">Según el tipo de publicación</small>
+          </div>
+          <span class="text-muted" id="comissionText">-</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Total ($)</span>
+          <strong id="totalCostText">-</strong>
+        </li>
+      </ul>
+      <hr class="mb-4">
+      <button class="btn btn-primary btn-lg" type="submit">Vender</button>
+      </form>
     </div>
-  </div>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+
+    <div id="spinner-wrapper">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
-  </div>
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/dropzone.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/cart.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/dropzone.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/cart.js"></script>
 </body>
 
 </html>

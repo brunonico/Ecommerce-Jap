@@ -5,19 +5,33 @@ let relatedProductsArray = [];
 
 googleForComment != null ? document.getElementById("yourName").innerHTML = googleForComment : document.getElementById("yourName").innerHTML = yourName;
 
+function getParam(name) {
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regexS = "[\\?&]" + name + "=([^&#]*)";
+    var regex = new RegExp(regexS);
+    var results = regex.exec(window.location.href);
+    if (results == null)
+        return "";
+    else
+        return results[1];
+}
+
+
 
 document.addEventListener("DOMContentLoaded", function (e) {
     fetch(PRODUCT_INFO_URL)
         .then(response => response.json())
         .then((data) => {
-            showInfo(data)
             fetch(PRODUCTS_URL)
                 .then(res => res.json())
                 .then((dataProd) => {
                     showRelatedProducts(data, dataProd)
+                    showInfo(data, dataProd)
                 })
         })
 });
+
+
 document.addEventListener("DOMContentLoaded", function (e) {
     fetch(PRODUCT_INFO_COMMENTS_URL)
         .then(response => response.json())
@@ -27,24 +41,46 @@ document.addEventListener("DOMContentLoaded", function (e) {
 });
 
 
-function showInfo(arreglo) {
-    let infoContent = "";
+function showInfo(arreglo, arregloProd) {
+    var paramProduct = getParam("cost");
 
-    $("#arrayName").append(arreglo.name);
-    $("#arrayCategory").append(arreglo.category)
-    $("#carouselActive").attr("src", arreglo.images[0])
+    if (paramProduct == 13500) {
+        let infoContent = "";
 
-    for (let i = 1; i < arreglo.images.length; i++) {
-        infoContent += `<div class="carousel-item">
+        $("#arrayName").append(arreglo.name);
+        $("#arrayCategory").append(arreglo.category)
+        $("#carouselActive").attr("src", arreglo.images[0])
+
+        for (let i = 1; i < arreglo.images.length; i++) {
+            infoContent += `<div class="carousel-item">
                             <img src="`+ arreglo.images[i] + `" class="d-block w-100" alt="Chevrolet Onix">
                         </div> `
-    };
+        };
 
-    $(".carousel-inner").append(infoContent);
-    $("#arrayDescription").append(arreglo.description);
-    $("#arraySoldCount").append(arreglo.soldCount);
-    $("#arrayPrice").append("****" + arreglo.cost + " " + arreglo.currency + "****")
+        $(".carousel-inner").append(infoContent);
+        $("#arrayDescription").append(arreglo.description);
+        $("#arraySoldCount").append(arreglo.soldCount);
+        $("#arrayPrice").append("****" + arreglo.cost + " " + arreglo.currency + "****")
+    } else {
+        for (let i = 1; i < arregloProd.length; i++) {
+            if (paramProduct == arregloProd[i].cost) {
+                $("#arrayName").append(arregloProd[i].name);
+                $("#arrayCategory").append('Autos')
+                let oneImage = ` <div id="carrousel-images" class="carousel slide carousel-fade" data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                <div class="carousel-item active">
+                                                <img id="carouselActive" src="${arregloProd[i].imgSrc}" class="d-block w-100" alt="${arregloProd[i].name}">
+                                                </div>
+                                            </div>
+                                         </div>`
 
+                document.getElementById("carrousel-images").innerHTML = oneImage;
+                $("#arrayDescription").append(arregloProd[i].description);
+                $("#arraySoldCount").append(arregloProd[i].soldCount);
+                $("#arrayPrice").append("****" + arregloProd[i].cost + " " + arregloProd[i].currency + "****")
+            }
+        }
+    }
 }
 
 function showComments(anArray) {
