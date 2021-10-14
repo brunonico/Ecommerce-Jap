@@ -53,12 +53,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
   if (googleSavedName != null) {
     insertName = googleSavedName;
-  } if (savedName == null) {
-    insertName = "No ha ingresado usuario"
   } else {
-    insertName = savedName;
+    if (savedName != null) {
+      insertName = savedName;
+    } else {
+      insertName = "No ha ingresado usuario"
+    }
   }
-
   document.getElementById("dropdownMenuButton").innerHTML = insertName;
   document.getElementById("logout").onclick = function () {
     localStorage.clear();
