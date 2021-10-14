@@ -43,7 +43,7 @@ function showChart(cartArray) {
     }
     $("#kardec").append(cartContent);
 
-    
+
     finalCost()
     $(".deleteButton").click(function () {
         $(this).parents(".card").remove();
@@ -66,10 +66,10 @@ function addProduct(array) {
                     <div class="card-body col-md-7">
                         <h5 class="card-title">${newProduct.name}</h5>
                         <p class="cartPrice">Precio unitario: ${newProduct.currency == 'UYU' ? '$' : 'u$s'} <span class="unitPrice">${newProduct.cost}</span></p>
-                        <p class="card-text"><input class="inputCount" id="count${i+2}" min="1" type="number" onchange="subtotalCalc(${newProductConverted},${i+2})" value="1"> Cantidad </p>
+                        <p class="card-text"><input class="inputCount" id="count${i + 2}" min="1" type="number" onchange="subtotalCalc(${newProductConverted},${i + 2})" value="1"> Cantidad </p>
                         <div class="d-flex w-25 justify-content-between">
                             <div>Subtotal:$ </div>
-                            <div id="subtotal${i+2}" class="subtotals" style="font-weight:bold;"> ${newProductConverted}</div>
+                            <div id="subtotal${i + 2}" class="subtotals" style="font-weight:bold;"> ${newProductConverted}</div>
                         </div>
                         <button href="#!" class="btn btn-outline-danger btn-sm deleteButton ">Eliminar</button>
                     </div>                
@@ -79,7 +79,7 @@ function addProduct(array) {
     }
     $("#kardec").append(newProductadded);
     finalCost();
-    
+
     $(".deleteButton").click(function () {
         $(this).parents(".card").remove();
         finalCost()
@@ -137,3 +137,14 @@ function getParam(name) {
 
 
 
+
+document.addEventListener("DOMContentLoaded", function (e) {
+    fetch(CART_BUY_URL)
+        .then(rep => rep.json())
+        .then(datos => {
+            $("#completarCompra").click(function () {
+                alert(datos.msg);
+                window.location.href = "home.html";
+            });
+        });
+});
