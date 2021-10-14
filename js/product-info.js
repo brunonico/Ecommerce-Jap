@@ -61,6 +61,9 @@ function showInfo(arreglo, arregloProd) {
         $("#arrayDescription").append(arreglo.description);
         $("#arraySoldCount").append(arreglo.soldCount);
         $("#arrayPrice").append("****" + arreglo.cost + " " + arreglo.currency + "****")
+        let aTagForAdd = `<a class="fas fa-shopping-cart" href="#" id="addToChart" onclick="addToChartFunction(${arregloProd, arreglo.soldCount})"style="color:black ">Agregar
+        al carrito</a> `;
+        $("#addToChart").html(aTagForAdd);
     } else {
         for (let i = 1; i < arregloProd.length; i++) {
             if (paramProduct == arregloProd[i].cost) {
@@ -78,6 +81,9 @@ function showInfo(arreglo, arregloProd) {
                 $("#arrayDescription").append(arregloProd[i].description);
                 $("#arraySoldCount").append(arregloProd[i].soldCount);
                 $("#arrayPrice").append("****" + arregloProd[i].cost + " " + arregloProd[i].currency + "****")
+                let aTagForAdd = `<a class="fas fa-shopping-cart" href="#" id="addToChart" onclick="addToChartFunction(${arregloProd, arregloProd[i].soldCount})"style="color:black ">Agregar
+        al carrito</a> `;
+                $("#addToChart").html(aTagForAdd);
             }
         }
     }
@@ -152,7 +158,6 @@ function showRelatedProducts(data, dataProd) {
                           <p class="card-text">${dataProd[i].description}</p>
                           <p class="card-text">USD ${dataProd[i].cost}</p> 
                           <a class="fas fa-shopping-cart" href="cart.html" style="color:black ">Agregar</a> 
-                                                                    
                       </div>
                 </div> `
 
@@ -160,3 +165,32 @@ function showRelatedProducts(data, dataProd) {
         }
     }
 }
+
+
+// export function addToChartFunction(array, value) {
+//     window.location.href = "cart.html";
+//     let newProductOnChart = ``;
+//     for (let i = 0; i < array.length; i++) {
+//         let convertedValue = conversion(articulo.currency, articulo.unitCost)
+//         if (array[i].cost == value) {
+//             newProductOnChart = `
+//             <div class="card col-md-auto border bg-light">               
+//                     <div style="min-height: 100px">
+//                         <img class="img-thumbnail" src="${array[i].imgSrc}" alt="Card image cap" width="124px" height="124px">
+//                     </div>
+//                     <div class="card-body col-md-7">
+//                         <h5 class="card-title">${array[i].name}</h5>
+//                         <p class="cartPrice">Precio unitario: ${array[i].currency == 'UYU' ? '$' : 'u$s'} <span class="unitPrice">${value}</span></p>
+//                         <p class="card-text"><input class="inputCount" id="count${i + 2}" min="1" type="number" onchange="subtotalCalc(${convertedValue},${i + 2})" value="1"> Cantidad </p>
+//                         <div class="d-flex w-25 justify-content-between">
+//                             <div>Subtotal:$ </div>
+//                             <div id="subtotal${i + 2}" class="subtotals" style="font-weight:bold;"> ${convertedValue}</div>
+//                         </div>
+//                         <button href="#!" class="btn btn-outline-danger btn-sm deleteButton ">Eliminar</button>
+//                     </div>                
+//             </div>
+// ` ;
+//         }
+//         $("#kardec").append(newProductOnChart);
+//     }
+// }

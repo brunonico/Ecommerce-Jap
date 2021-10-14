@@ -14,33 +14,33 @@ function showChart(cartArray) {
 
     for (let i = 0; i < cartArray.length; i++) {
         let articulo = cartArray[i];
-
+        let convertedValue = conversion(articulo.currency, articulo.unitCost);
         cartContent +=
-            `<div class="card cartCard">      
-                <img class="img-thumbnail h-50 w-50" src="${articulo.src}" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">${articulo.name}</h5>
-                    <div class="cartPrice">Precio unitario: ${articulo.currency == 'UYU' ? '$' : 'u$s'} <span class="unitPrice">${articulo.unitCost}</span></div>   
-                    <p class="card-text"><input class="inputCount" id="count${i}" type="number" onchange="subtotalCalc(${articulo.unitCost},${i})" value="${articulo.count}"> Cantidad </p>          
-                    <div id="subtotal${i}" class="total" style="font-weight:bold;"> ${articulo.currency == 'UYU' ? '$' : 'u$s'} ${articulo.unitCost}</div>
-                    <button href="#!" class="deleteButton"><i class="fas fa-minus"></i></button>
-                </div>  
-            </div>     
+            `
+            <div class="card col-md-auto border bg-light">               
+                    <div style="min-height: 100px">
+                        <img class="img-thumbnail" src="${articulo.src}" alt="Card image cap" width="124px" height="124px">
+                    </div>
+                    <div class="card-body col-md-7">
+                        <h5 class="card-title">${articulo.name}</h5>
+                        <p class="cartPrice">Precio unitario: ${articulo.currency == 'UYU' ? '$' : 'u$s'} <span class="unitPrice">${articulo.unitCost}</span></p>
+                        <p class="card-text"><input class="inputCount" id="count${i}" min="1" type="number" onchange="subtotalCalc(${convertedValue},${i})" value="${articulo.count}"> Cantidad </p>
+                        <div class="d-flex w-25 justify-content-between">
+                            <div>Subtotal:$ </div>
+                            <div id="subtotal${i}" class="subtotals" style="font-weight:bold;"> ${convertedValue * articulo.count}</div>
+                        </div>
+                        <button href="#!" class="btn btn-outline-danger btn-sm deleteButton ">Eliminar</button>
+                    </div>                
+            </div>
 `
-
     }
-
-
     $("#kardec").append(cartContent);
 
     $(".deleteButton").click(function () {
         $(this).parents(".card").remove();
+        finalCost()
     });
-    $(".inputCount").change(function () {
-        var actualInput = $(this).val()
-        $(".thePrice").replaceWith(actualInput);
-    })
-
+    finalCost()
 }
 
 
@@ -52,14 +52,34 @@ function conversion(currency, cost) {
         return cost;
     }
 }
-
 $("#shippingText").html($("input:checked").val() + "%");
 
+$(".custom-control-input").change(function () {
+    $("#shippingText").html($("input:checked").val() + "%");
+    finalCost()
+})
 
-function subtotalCalc (unitCost, i) {
+
+function subtotalCalc(unitCost, i) {
     let count = parseInt(document.getElementById(`count${i}`).value);
-
-    let subTot = unitCost * count;
+    let subTot = parseInt(unitCost) * count;
     document.getElementById(`subtotal${i}`).innerHTML = subTot;
-
+    finalCost()
 }
+
+function finalCost() {
+    let allCartProducts = document.getElementsByClassName("subtotals");
+    let total = 0;
+    for (let i = 0; i < allCartProducts.length; i++) {
+        total += parseInt(allCartProducts[i].innerHTML)
+    }
+    document.getElementById("productCostText").innerHTML = '$ ' + total;
+    let shippingToPay = (total * $("input:checked").val()) / 100;
+    let totalToPay = total + shippingToPay;
+    $("#totalCostText").html('$ ' + totalToPay);
+}
+
+
+
+
+
