@@ -49,6 +49,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
   let googleSavedName = localStorage.getItem("googleName");
   let insertName = "";
 
+  console.log(googleSavedName)
+
   if (googleSavedName != null) {
     insertName = googleSavedName;
   } if (savedName == null) {
