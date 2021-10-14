@@ -2,8 +2,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
     fetch("https://japdevdep.github.io/ecommerce-api/cart/654.json")
         .then(res => res.json())
         .then(info => {
-            let cartArray = info.articles;
-            showChart(cartArray)
+            fetch(PRODUCTS_URL)
+                .then(resp => resp.json())
+                .then((prodArray) => {
+                    let cartArray = info.articles;
+                    showChart(cartArray)
+                    addProduct(prodArray)
+                })
         })
 });
 
@@ -15,8 +20,9 @@ function showChart(cartArray) {
     for (let i = 0; i < cartArray.length; i++) {
         let articulo = cartArray[i];
         let convertedValue = conversion(articulo.currency, articulo.unitCost);
-        cartContent +=
-            `
+        if (getParam("id") == 1) {
+            cartContent +=
+                `
             <div class="card col-md-auto border bg-light">               
                     <div style="min-height: 100px">
                         <img class="img-thumbnail" src="${articulo.src}" alt="Card image cap" width="124px" height="124px">
@@ -33,15 +39,53 @@ function showChart(cartArray) {
                     </div>                
             </div>
 `
+        }
     }
     $("#kardec").append(cartContent);
 
+    
+    finalCost()
     $(".deleteButton").click(function () {
         $(this).parents(".card").remove();
         finalCost()
     });
-    finalCost()
 }
+
+function addProduct(array) {
+    let newProductadded = "";
+    for (let i = 0; i < array.length; i++) {
+        let newProduct = array[i];
+        let newProductConverted = conversion(newProduct.currency, newProduct.cost);
+        if (getParam("id") == newProduct.cost) {
+            newProductadded += `
+            
+            <div class="card col-md-auto border bg-light">               
+                    <div style="min-height: 100px">
+                        <img class="img-thumbnail" src="${newProduct.imgSrc}" alt="Card image cap" width="124px" height="124px">
+                    </div>
+                    <div class="card-body col-md-7">
+                        <h5 class="card-title">${newProduct.name}</h5>
+                        <p class="cartPrice">Precio unitario: ${newProduct.currency == 'UYU' ? '$' : 'u$s'} <span class="unitPrice">${newProduct.cost}</span></p>
+                        <p class="card-text"><input class="inputCount" id="count${i+2}" min="1" type="number" onchange="subtotalCalc(${newProductConverted},${i+2})" value="1"> Cantidad </p>
+                        <div class="d-flex w-25 justify-content-between">
+                            <div>Subtotal:$ </div>
+                            <div id="subtotal${i+2}" class="subtotals" style="font-weight:bold;"> ${newProductConverted}</div>
+                        </div>
+                        <button href="#!" class="btn btn-outline-danger btn-sm deleteButton ">Eliminar</button>
+                    </div>                
+            </div>`
+        }
+
+    }
+    $("#kardec").append(newProductadded);
+    finalCost();
+    
+    $(".deleteButton").click(function () {
+        $(this).parents(".card").remove();
+        finalCost()
+    });
+}
+
 
 
 function conversion(currency, cost) {
@@ -80,6 +124,16 @@ function finalCost() {
 }
 
 
+function getParam(name) {
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regexS = "[\\?&]" + name + "=([^&#]*)";
+    var regex = new RegExp(regexS);
+    var results = regex.exec(window.location.href);
+    if (results == null)
+        return "";
+    else
+        return results[1];
+}
 
 
 
