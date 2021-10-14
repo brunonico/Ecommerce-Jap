@@ -1,7 +1,7 @@
 const CATEGORIES_URL = "https://japdevdep.github.io/ecommerce-api/category/all.json";
 const PUBLISH_PRODUCT_URL = "https://japdevdep.github.io/ecommerce-api/product/publish.json";
 const CATEGORY_INFO_URL = "https://japdevdep.github.io/ecommerce-api/category/1234.json";
-const PRODUCTS_URL = "https://japdevdep.github.io/ecommerce-api/product/all.json";
+const PRODUCTS_URL = "";
 const PRODUCT_INFO_URL = "https://japdevdep.github.io/ecommerce-api/product/5678.json";
 const PRODUCT_INFO_COMMENTS_URL = "https://japdevdep.github.io/ecommerce-api/product/5678-comments.json";
 const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";
@@ -47,9 +47,16 @@ var getJSONData = function (url) {
 document.addEventListener("DOMContentLoaded", function (e) {
   let savedName = localStorage.getItem("inputName");
   let googleSavedName = localStorage.getItem("googleName");
-  let insertName = "";  
-  googleSavedName != null ? insertName=googleSavedName : insertName=savedName;
-  savedName == null ? insertName ="No ha ingresado usuario" : insertName=savedName;
+  let insertName = "";
+
+  if (googleSavedName != null) {
+    insertName = googleSavedName;
+  } if (savedName == null) {
+    insertName = "No ha ingresado usuario"
+  } else {
+    insertName = savedName;
+  }
+
   document.getElementById("dropdownMenuButton").innerHTML = insertName;
   document.getElementById("logout").onclick = function () {
     localStorage.clear();
