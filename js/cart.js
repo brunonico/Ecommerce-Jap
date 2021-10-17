@@ -20,25 +20,31 @@ function showChart(cartArray) {
     for (let i = 0; i < cartArray.length; i++) {
         let articulo = cartArray[i];
         let convertedValue = conversion(articulo.currency, articulo.unitCost);
-        if (getParam("id") == 1) {
+        if (getParam("id") == 1||getParam("id") == 1000) {
             cartContent +=
-                `
-            <div class="card col-md-auto border bg-light">               
-                    <div style="min-height: 100px">
-                        <img class="img-thumbnail" src="${articulo.src}" alt="Card image cap" width="124px" height="124px">
-                    </div>
-                    <div class="card-body col-md-7">
-                        <h5 class="card-title">${articulo.name}</h5>
-                        <p class="cartPrice">Precio unitario: ${articulo.currency == 'UYU' ? '$' : 'u$s'} <span class="unitPrice">${articulo.unitCost}</span></p>
-                        <p class="card-text"><input class="inputCount" id="count${i}" min="1" type="number" onchange="subtotalCalc(${convertedValue},${i})" value="${articulo.count}"> Cantidad </p>
-                        <div class="d-flex w-25 justify-content-between">
-                            <div>Subtotal:$ </div>
-                            <div id="subtotal${i}" class="subtotals" style="font-weight:bold;"> ${convertedValue * articulo.count}</div>
+                `<div class="card border bg-light" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex flex-wrap align-items-center">
+                        <img
+                            src="${articulo.src}"
+                            alt="..."
+                            class="img-thumbnail"
+                        />
                         </div>
-                        <button href="#!" class="btn btn-outline-danger btn-sm deleteButton ">Eliminar</button>
-                    </div>                
-            </div>
-`
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">${articulo.name}</h5>
+                                <p class="cartPrice">Precio unitario: ${articulo.currency == 'UYU' ? '$' : 'u$s'} <span class="unitPrice">${articulo.unitCost}</span></p>
+                                <p class="card-text"><input class="inputCount" id="count${i}" min="1" type="number" onchange="subtotalCalc(${convertedValue},${i})" value="${articulo.count}"> Cantidad </p>
+                                <div class="d-flex w-25 justify-content-between">
+                                    <div>Subtotal:$ </div>
+                                    <div id="subtotal${i}" class="subtotals" style="font-weight:bold;"> ${convertedValue * articulo.count}</div>
+                                </div>
+                            <button href="#!" class="btn btn-outline-danger btn-sm deleteButton ">Eliminar</button>
+                            </div>                
+                        </div>
+                    </div>
+                </div>`
         }
     }
     $("#kardec").append(cartContent);
@@ -56,24 +62,32 @@ function addProduct(array) {
     for (let i = 0; i < array.length; i++) {
         let newProduct = array[i];
         let newProductConverted = conversion(newProduct.currency, newProduct.cost);
-        if (getParam("id") == newProduct.cost) {
+        if (getParam("id") == newProduct.cost||getParam("id") == 1000) {
             newProductadded += `
-            
-            <div class="card col-md-auto border bg-light">               
-                    <div style="min-height: 100px">
-                        <img class="img-thumbnail" src="${newProduct.imgSrc}" alt="Card image cap" width="124px" height="124px">
+            <div class="card border bg-light" style="max-width: 503px;">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex flex-wrap align-items-center">
+                    <img
+                        src="${newProduct.imgSrc}"
+                        alt="..."
+                        class="img-thumbnail"
+                    />
                     </div>
-                    <div class="card-body col-md-7">
-                        <h5 class="card-title">${newProduct.name}</h5>
-                        <p class="cartPrice">Precio unitario: ${newProduct.currency == 'UYU' ? '$' : 'u$s'} <span class="unitPrice">${newProduct.cost}</span></p>
-                        <p class="card-text"><input class="inputCount" id="count${i + 2}" min="1" type="number" onchange="subtotalCalc(${newProductConverted},${i + 2})" value="1"> Cantidad </p>
-                        <div class="d-flex w-25 justify-content-between">
-                            <div>Subtotal:$ </div>
-                            <div id="subtotal${i + 2}" class="subtotals" style="font-weight:bold;"> ${newProductConverted}</div>
-                        </div>
-                        <button href="#!" class="btn btn-outline-danger btn-sm deleteButton ">Eliminar</button>
-                    </div>                
-            </div>`
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">${newProduct.name}</h5>
+                            <p class="cartPrice">Precio unitario: ${newProduct.currency == 'UYU' ? '$' : 'u$s'} <span class="unitPrice">${newProduct.cost}</span></p>
+                            <p class="card-text"><input class="inputCount" id="count${i + 2}" min="1" type="number" onchange="subtotalCalc(${newProductConverted},${i + 2})" value="1"> Cantidad </p>
+                            <div class="d-flex w-25 justify-content-between">
+                                <div>Subtotal:$ </div>
+                                <div id="subtotal${i + 2}" class="subtotals" style="font-weight:bold;"> ${newProductConverted}</div>
+                            </div>
+                            <button href="#!" class="btn btn-outline-danger btn-sm deleteButton ">Eliminar</button>
+                        </div>                
+                    </div>
+                </div>
+            </div>
+            `          
         }
 
     }
