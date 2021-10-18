@@ -28,6 +28,12 @@
         font-size: 3.5rem;
       }
     }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -54,12 +60,44 @@
     </div>
   </nav>
   <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 6 (Fecha de entrega: 31/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
-    </div>
+    <h2 class="text-center">Mi perfil</h2>
+    <hr>
+    <form>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="names">Nombres</label>
+          <input type="text" class="form-control" id="names" placeholder="Nombres">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="surnames">Apellidos</label>
+          <input type="text" class="form-control" id="surnames" placeholder="Apellidos">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputSelect">Departamento</label>
+        <select class="form-select form-control" aria-label="Default select example" id="inputSelect">
+          <option selected>Montevideo</option>
+          <option value="1">Canelones</option>
+          <option value="2">Colonia</option>
+          <option value="3">San José</option>
+          <option value="4">Durazno</option>
+          <option value="5">Rivera</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="inputAddress">Dirección</label>
+        <input type="text" class="form-control" id="inputAddress" placeholder="Gral Flores 1234 apto 101">
+      </div>
+      <div class="form-group">
+        <label for="inputCelular">Número de contacto</label>
+        <input type="number" class="form-control" id="inputCelular" placeholder="09-------">
+      </div>
+      <div class="form-group">
+        <label for="inputAddress">Dirección</label>
+        <input type="text" class="form-control" id="inputAddress" placeholder="Gral Flores 1234 apto 101">
+      </div>
+      <button class="btn btn-primary" onclick="saveInfo()">Guardar</button>
+    </form>
   </div>
   <footer class="text-muted bg-light">
     <div class="container">

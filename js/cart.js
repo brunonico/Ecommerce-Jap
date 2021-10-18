@@ -20,7 +20,7 @@ function showChart(cartArray) {
     for (let i = 0; i < cartArray.length; i++) {
         let articulo = cartArray[i];
         let convertedValue = conversion(articulo.currency, articulo.unitCost);
-        if (getParam("id") == 1||getParam("id") == 1000) {
+        if (getParam() == 1||getParam() == 1000) {
             cartContent +=
                 `<div class="card border bg-light" style="max-width: 540px;">
                     <div class="row g-0">
@@ -62,7 +62,7 @@ function addProduct(array) {
     for (let i = 0; i < array.length; i++) {
         let newProduct = array[i];
         let newProductConverted = conversion(newProduct.currency, newProduct.cost);
-        if (getParam("id") == newProduct.cost||getParam("id") == 1000) {
+        if (getParam() == newProduct.cost||getParam() == 1000) {
             newProductadded += `
             <div class="card border bg-light" style="max-width: 503px;">
                 <div class="row g-0">
@@ -137,20 +137,11 @@ function finalCost() {
     $("#totalCostText").html('$ ' + totalToPay);
 }
 
-
-function getParam(name) {
-    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-    var regexS = "[\\?&]" + name + "=([^&#]*)";
-    var regex = new RegExp(regexS);
-    var results = regex.exec(window.location.href);
-    if (results == null)
-        return "";
-    else
-        return results[1];
+function getParam() {
+    let actualUrl = window.location.href;
+    let urlArray = actualUrl.split("=");
+    return urlArray[1];
 }
-
-
-
 
 document.addEventListener("DOMContentLoaded", function (e) {
     fetch(CART_BUY_URL)

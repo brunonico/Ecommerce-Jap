@@ -5,17 +5,11 @@ let relatedProductsArray = [];
 
 googleForComment != null ? document.getElementById("yourName").innerHTML = googleForComment : document.getElementById("yourName").innerHTML = yourName;
 
-function getParam(name) {
-    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-    var regexS = "[\\?&]" + name + "=([^&#]*)";
-    var regex = new RegExp(regexS);
-    var results = regex.exec(window.location.href);
-    if (results == null)
-        return "";
-    else
-        return results[1];
+function getParam() {
+    let actualUrl = window.location.href;
+    let urlArray = actualUrl.split("=");
+    return urlArray[1];
 }
-
 
 
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -42,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 
 function showInfo(arreglo, arregloProd) {
-    var paramProduct = getParam("cost");
+    var paramProduct = getParam();
 
     if (paramProduct == 13500) {
         let infoContent = "";

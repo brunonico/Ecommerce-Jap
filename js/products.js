@@ -57,22 +57,22 @@ function showProducts(arreglo) {
 
                 content +=
                     `<a href= "product-info.html?cost=` + products.cost + `" class="list-group-item list-group-item-action">
-                <div class="row">
-                <div class="col-3">
-                    <img src="` + products.imgSrc + `" alt="` + products.description + `" class="img-thumbnail">
-                </div>
-                <div class="col">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h4 class="mb-1">`+ products.name + `</h4>
-                        <strong class="text-muted">` + products.cost + " " + products.currency + `</strong>
-                    </div>
-                    <div class="d-flex w-100 justify-content-between">
-                    <p class="mb-1">` + products.description + `</p>
-                    <strong class="text-muted">` + products.soldCount + ` unidades vendidas. </strong> 
-                    </div>
-                </div>
-            </div>
-            </a>
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="` + products.imgSrc + `" alt="` + products.description + `" class="img-thumbnail">
+                            </div>
+                            <div class="col">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h4 class="mb-1">`+ products.name + `</h4>
+                                    <strong class="text-muted">` + products.cost + " " + products.currency + `</strong>
+                                </div>
+                                <div class="d-flex w-100 justify-content-between">
+                                <p class="mb-1">` + products.description + `</p>
+                                <strong class="text-muted">` + products.soldCount + ` unidades vendidas. </strong> 
+                                </div>
+                            </div>
+                        </div>
+                    </a>
             <br>
                 `
             }
@@ -145,8 +145,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
     });
 
 });
-
-
 
 
 function searched(a, b) {
