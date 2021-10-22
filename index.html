@@ -17,32 +17,62 @@
   <meta name="google-signin-client_id"
     content="342264758681-el6pfck9em3m9prp7lf622oq6tq0pbtc.apps.googleusercontent.com">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <link rel="stylesheet" href="css/product-info.css">
 
   <style>
-    .form-signin {
-      max-width: 340px;
-      padding: 15px;
-      margin: auto;
-      border: black solid;
-      background: rgba(212, 190, 190, 0.8);
-      text-align: center;
-
-    }
-
     body {
       display: flex;
       background-image: url(img/screenLogin.jpg);
       background-repeat: no-repeat;
       background-size: cover;
       min-height: 100vh;
-
     }
+
   </style>
 
 </head>
 
 <body>
-  <form class="form-signin" action="home.html">
+  <div class="container login-container">
+    <div class="row">
+      <form class="col-md-6 login-form-1" action="home.html">
+        <h3>Ingresar</h3>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Usuario *" id ="inputLogin" autocomplete="off" required />
+        </div>
+        <br>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Password *" value="" required />
+        </div>
+        <br>
+        <div class="form-group text-center">
+          <input type="submit" class="btnSubmit" id="enterBtn" value="Login" />
+        </div>
+      </form>
+      <form class="col-md-6 login-form-2" action="my-profile.html">
+        <div class="login-logo">
+          <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
+        </div>
+        <h3>Registrarse</h3>
+        <div class="form-group">
+          <input type="text" id="newUser" class="form-control" placeholder="Usuario *" value="" required/>
+        </div>
+        <br>
+        <div class="form-group">
+          <input type="email" id="newEmail" class="form-control" placeholder="Email *" value="" required />
+        </div>
+        <br>
+        <div class="form-group text-center">
+          <input type="submit" id="newBtnSubmit" class="btnSubmit" value="Seguir registro" />
+
+        </div>
+        <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" id="googleBtn"></div>
+        
+      </form>
+    </div>
+  </div>
+
+  <!-- <form class="form-signin" action="home.html">
 
     <h1>Sign in</h1>
 
@@ -61,29 +91,26 @@
     <label>
       <input type="checkbox" required> Clicking here, you agree on our <a href="#">terms and condition</a>.
     </label>
-    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" id="googleBtn"></div>
+     -->
+ 
 
-    <script>
-      function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        localStorage.setItem("googleName",profile.getName())
-        var googleName = profile.getName(); 
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        console.log('Given Name: ' + profile.getGivenName());
-        console.log('Family Name: ' + profile.getFamilyName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());
-        // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-        window.location = "home.html";
-      }
-    </script>
-    <br>
-    <button id="enterBtn" type="submit">Enter</button>
-  </form>
-
+  <script>
+    function onSignIn(googleUser) {
+      // Useful data for your client-side scripts:
+      var profile = googleUser.getBasicProfile();
+      localStorage.setItem("googleName", profile.getName())
+      var googleName = profile.getName();
+      console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+      console.log('Given Name: ' + profile.getGivenName());
+      console.log('Family Name: ' + profile.getFamilyName());
+      console.log("Image URL: " + profile.getImageUrl());
+      console.log("Email: " + profile.getEmail());
+      // The ID token you need to pass to your backend:
+      var id_token = googleUser.getAuthResponse().id_token;
+      console.log("ID Token: " + id_token);
+      window.location = "home.html";
+    }
+  </script>
   <script src="js/init.js"></script>
   <script src="js/login.js"></script>
 </body>

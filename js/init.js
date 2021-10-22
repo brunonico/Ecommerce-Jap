@@ -45,12 +45,10 @@ var getJSONData = function (url) {
 //acorte lineas en el init js al pasar código al html. Queda más prolijo ya que ahora solamente es necesario insertar uno de los dos nombres guardados.
 
 document.addEventListener("DOMContentLoaded", function (e) {
-  let savedName = localStorage.getItem("inputName");
+  let savedName = localStorage.getItem("inputLogin");
   let googleSavedName = localStorage.getItem("googleName");
   let insertName = "";
-
   console.log(googleSavedName)
-
   if (googleSavedName != null) {
     insertName = googleSavedName;
   } else {
@@ -63,5 +61,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
   document.getElementById("dropdownMenuButton").innerHTML = insertName;
   document.getElementById("logout").onclick = function () {
     localStorage.clear();
+    sessionStorage.clear();
   }
 });

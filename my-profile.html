@@ -64,13 +64,17 @@
     <hr>
     <form>
       <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="names">Nombres</label>
-          <input type="text" class="form-control" id="names" placeholder="Nombres">
+        <div class="form-group col-md-4">
+          <label for="names">Nombre de usuario</label>
+          <input type="text" class="form-control" id="username" placeholder="Usuario" required>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
+          <label for="names">Nombres</label>
+          <input type="text" class="form-control" id="names" placeholder="Nombres" required>
+        </div>
+        <div class="form-group col-md-4">
           <label for="surnames">Apellidos</label>
-          <input type="text" class="form-control" id="surnames" placeholder="Apellidos">
+          <input type="text" class="form-control" id="surnames" placeholder="Apellidos" required>
         </div>
       </div>
       <div class="form-group">
@@ -86,17 +90,17 @@
       </div>
       <div class="form-group">
         <label for="inputAddress">Dirección</label>
-        <input type="text" class="form-control" id="inputAddress" placeholder="Gral Flores 1234 apto 101">
+        <input type="text" class="form-control" id="inputAddress" placeholder="Gral Flores 1234 apto 101" required>
       </div>
       <div class="form-group">
         <label for="inputCelular">Número de contacto</label>
-        <input type="number" class="form-control" id="inputCelular" placeholder="09-------">
+        <input type="number" class="form-control" id="inputCelular" placeholder="09-------" required>
       </div>
       <div class="form-group">
-        <label for="inputAddress">Dirección</label>
-        <input type="text" class="form-control" id="inputAddress" placeholder="Gral Flores 1234 apto 101">
+        <label for="inputEmail">Dirección</label>
+        <input type="email" class="form-control" id="inputEmail" placeholder="user@username.com" required>
       </div>
-      <button class="btn btn-primary" onclick="saveInfo()">Guardar</button>
+      <button type="submit" class="btn btn-primary" id="saveData">Guardar</button>
     </form>
   </div>
   <footer class="text-muted bg-light">
