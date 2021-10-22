@@ -16,24 +16,43 @@
 </head>
 
 <body>
-  <nav class="site-header sticky-top py-1 bg-dark">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-      <a class="py-2 d-none d-md-inline-block" href="home.html">Inicio</a>
-      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a href="cart.html?id=1" class="dropdown-item">Ver mi carrito</a>
-          <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
-          <a class="dropdown-item" href="index.html" id="logout">Cerrar sesión</a>
-        </div>
+  <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+    <div class="container d-flex flex-column flex-md-row float-right">
+      <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        <span>Ventanas</span>
+      </button>
+      <div class="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
+        <ul class="navbar-nav justify-content-between w-100">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="home.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="products.html">Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="sell.html">Vender</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link text-white dropdown-toggle btn btn-secondary" href="#" id="dropdownMenuButton"
+              role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="cart.html?id=1">Ver mi carrito</a>
+              <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+              <a class="dropdown-item" href="index.html" id="logout">Cerrar sesión</a>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
+
   <main role="main">
     <div class="container mt-5">
       <div class="text-center p-4">
