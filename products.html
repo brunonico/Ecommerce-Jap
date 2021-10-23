@@ -58,31 +58,29 @@
       <h2>Productos</h2>
       <p class="lead">Estos son los productos de la categoría seleccionada</p>
     </div>
-    <div class="container">
 
-      <div class="row">
-        <div class="col text-right">
-          <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
-            
-            <label class="btn btn-light">
-              <input type="search" id="search">              
-            </label>
+    <div class="album bg-light p-0">
+      <div class="text-center p-0">
+        <label class="btn btn-light">
+          <input type="search" id="search">
+        </label>
+        <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
+          <label class="btn btn-light active" id="sortAscPrice">
+            <input type="radio" name="options" autocomplete="off" checked><i class="fas fa-sort-numeric-up"></i>
 
-            <label class="btn btn-light active" id="sortAscPrice">
-              <input type="radio" name="options" autocomplete="off" checked><i class="fas fa-sort-numeric-up"></i> ^USD 
-            </label>
-            <label class="btn btn-light" id="sortDescPrice">
-              <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-numeric-down"></i> USD
-            </label>
-            <label class="btn btn-light" id="sortBySales">
-              <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i>Relevancia.
-            </label>
-          </div>
+          </label>
+          <label class="btn btn-light" id="sortDescPrice">
+            <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-numeric-down"></i>
+          </label>
+          <label class="btn btn-light" id="sortBySales">
+            <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i>Vent.
+          </label>
         </div>
+
       </div>
 
-      <div class="row justify-content-end">
-        <div class="col-md-6"></div>
+
+      <div class="text-center p-0">
         <div class="col-md-6 col-sm-12 mb-1 container">
           <div class="row container p-0 m-0">
             <div class="col">
@@ -96,18 +94,19 @@
             </div>
             <div class="col-3 p-0">
               <div class="btn-group" role="group">
-                <button class="btn btn-light btn-block" id="filter">Filtrar</button>
-                <button class="btn btn-link btn-sm" id="erase">Limpiar</button> <br>
+                <button class="btn btn-light btn-block" id="filter"><i class="fas fa-search"></i></button>
+                <button class="btn btn-link btn-sm" id="erase"><i class="fas fa-eraser"></i></button> <br>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="list-group" id="prod-list-container">
+      </div>
+      <div class="container">
+        <div id="prod-list-container" class="row">
         </div>
       </div>
+
 
     </div>
 

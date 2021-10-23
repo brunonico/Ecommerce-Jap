@@ -21,6 +21,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 .then((dataProd) => {
                     showRelatedProducts(data, dataProd)
                     showInfo(data, dataProd)
+                    $("#addToChart").click(function () {
+                        newProductOnChart(dataProd)
+                    });
                 })
         })
 });
@@ -75,7 +78,7 @@ function showInfo(arreglo, arregloProd) {
                 $("#arrayDescription").append(arregloProd[i].description);
                 $("#arraySoldCount").append(arregloProd[i].soldCount);
                 $("#arrayPrice").append("****" + arregloProd[i].cost + " " + arregloProd[i].currency + "****")
-                let aTagForAdd = `<a class="fas fa-shopping-cart" href="cart.html?id=${arregloProd[i].cost}" id="addToChart" style="color:black ">Agregar
+                let aTagForAdd = `<a class="fas fa-shopping-cart" href="cart.html" id="addToChart" style="color:black ">Agregar
         al carrito</a> `;
                 $("#addToChart").html(aTagForAdd);
             }
@@ -156,6 +159,30 @@ function showRelatedProducts(data, dataProd) {
                 </div> `
 
             $("#relatedProducts").append(relatedProduct);
+        }
+    }
+}
+
+
+function newProductOnChart(data) {
+    let newProductAdded = "newProductAdded";
+    var paramProduct = getParam();
+
+    for (let i = 0; i < data.length; i++) {
+        if (paramProduct == data[i].cost) {
+            let newProductname = data[i].name;
+            let newProductCost = data[i].cost;
+            let newProductCurrency = data[i].currency;
+            let newProductDescription = data[i].description;
+            let newProductImgSrc = data[i].imgSrc;
+
+            sessionStorage.setItem(newProductAdded, JSON.stringify({
+                newProductname: newProductname,
+                newProductCost: newProductCost,
+                newProductCurrency: newProductCurrency,
+                newProductDescription: newProductDescription,
+                newProductImgSrc: newProductImgSrc
+            }))
         }
     }
 }

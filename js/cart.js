@@ -2,13 +2,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
     fetch("https://japdevdep.github.io/ecommerce-api/cart/654.json")
         .then(res => res.json())
         .then(info => {
-            fetch(PRODUCTS_URL)
-                .then(resp => resp.json())
-                .then((prodArray) => {
-                    let cartArray = info.articles;
-                    showChart(cartArray)
-                    addProduct(prodArray)
-                })
+            let cartArray = info.articles;
+            showChart(cartArray)
         })
 });
 
@@ -20,7 +15,7 @@ function showChart(cartArray) {
     for (let i = 0; i < cartArray.length; i++) {
         let articulo = cartArray[i];
         let convertedValue = conversion(articulo.currency, articulo.unitCost);
-        if (getParam() == 1||getParam() == 1000) {
+        if (getParam() == 1 || getParam() == 1000) {
             cartContent +=
                 `<div class="card border bg-light" style="max-width: 540px;">
                     <div class="row g-0">
@@ -57,48 +52,7 @@ function showChart(cartArray) {
     });
 }
 
-function addProduct(array) {
-    let newProductadded = "";
-    for (let i = 0; i < array.length; i++) {
-        let newProduct = array[i];
-        let newProductConverted = conversion(newProduct.currency, newProduct.cost);
-        if (getParam() == newProduct.cost||getParam() == 1000) {
-            newProductadded += `
-            <div class="card border bg-light" style="max-width: 503px;">
-                <div class="row g-0">
-                    <div class="col-md-4 d-flex flex-wrap align-items-center">
-                    <img
-                        src="${newProduct.imgSrc}"
-                        alt="..."
-                        class="img-thumbnail"
-                    />
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">${newProduct.name}</h5>
-                            <p class="cartPrice">Precio unitario: ${newProduct.currency == 'UYU' ? '$' : 'u$s'} <span class="unitPrice">${newProduct.cost}</span></p>
-                            <p class="card-text"><input class="inputCount" id="count${i + 2}" min="1" type="number" onchange="subtotalCalc(${newProductConverted},${i + 2})" value="1"> Cantidad </p>
-                            <div class="d-flex w-25 justify-content-between">
-                                <div>Subtotal:$ </div>
-                                <div id="subtotal${i + 2}" class="subtotals" style="font-weight:bold;"> ${newProductConverted}</div>
-                            </div>
-                            <button href="#!" class="btn btn-outline-danger btn-sm deleteButton ">Eliminar</button>
-                        </div>                
-                    </div>
-                </div>
-            </div>
-            `          
-        }
 
-    }
-    $("#kardec").append(newProductadded);
-    finalCost();
-
-    $(".deleteButton").click(function () {
-        $(this).parents(".card").remove();
-        finalCost()
-    });
-}
 
 
 
@@ -153,3 +107,47 @@ document.addEventListener("DOMContentLoaded", function (e) {
             });
         });
 });
+
+
+
+function feedingChart() {
+    let productAdded = sessionStorage.getItem("newProductAdded");
+    let productAddedContent = " ";
+    if (productAdded) {
+        let productAddedInfo = JSON.parse(productAdded);
+        let newProductConverted = conversion(productAddedInfo.newProductCurrency, productAddedInfo.newProductCost)
+        productAddedContent = `
+        <div class="card border bg-light" style="max-width: 503px;">
+            <div class="row g-0">
+                <div class="col-md-4 d-flex flex-wrap align-items-center">
+                <img
+                    src="${productAddedInfo.newProductImgSrc}"
+                    alt="..."
+                    class="img-thumbnail"
+                />
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">${productAddedInfo.newProductname}</h5>
+                        <p class="cartPrice">Precio unitario: ${productAddedInfo.newProductCurrency == 'UYU' ? '$' : 'u$s'} <span class="unitPrice">${productAddedInfo.newProductCost}</span></p>
+                        <p class="card-text"><input class="inputCount" id="count5" min="1" type="number" onchange="subtotalCalc(${newProductConverted},5)" value="1"> Cantidad </p>
+                        <div class="d-flex w-25 justify-content-between">
+                            <div>Subtotal:$ </div>
+                            <div id="subtotal5" class="subtotals" style="font-weight:bold;"> ${newProductConverted}</div>
+                        </div>
+                        <button href="#!" class="btn btn-outline-danger btn-sm anotherDeleteButton ">Eliminar</button>
+                    </div>                
+                </div>
+            </div>
+        </div>
+        `
+        $("#kardec").append(productAddedContent);
+        finalCost();
+        $(".anotherDeleteButton").click(function () {
+            $(this).parents(".card").remove();
+            sessionStorage.removeItem("newProductAdded")
+            finalCost()
+        });
+    }
+}
+feedingChart();

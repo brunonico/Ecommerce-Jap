@@ -56,24 +56,20 @@ function showProducts(arreglo) {
                 && ((maxPrice == undefined) || (maxPrice != undefined && parseInt(products.cost) <= maxPrice))) {
 
                 content +=
-                    `<a href= "product-info.html?cost=` + products.cost + `" class="list-group-item list-group-item-action">
-                        <div class="row">
-                            <div class="col-3">
-                                <img src="` + products.imgSrc + `" alt="` + products.description + `" class="img-thumbnail">
-                            </div>
-                            <div class="col">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h4 class="mb-1">`+ products.name + `</h4>
-                                    <strong class="text-muted">` + products.cost + " " + products.currency + `</strong>
-                                </div>
-                                <div class="d-flex w-100 justify-content-between">
-                                <p class="mb-1">` + products.description + `</p>
-                                <strong class="text-muted">` + products.soldCount + ` unidades vendidas. </strong> 
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-            <br>
+                    `
+            <div class="col-md-4">
+                <a href= "product-info.html?cost=` + products.cost + `" class="card mb-4 shadow-sm custom-card">
+                <img class="bd-placeholder-img card-img-top" src="` + products.imgSrc + `" alt="` + products.description + `">
+                <h2 class="m-3">${products.name}</h2>
+                <div class="card-body">
+                    <div class="d-flex w-100 justify-content-between">
+                        <p class="card-text">Precio : ${products.cost} ${products.currency}</p>
+                        <p class="card-text">${products.soldCount} vendidos.</p>
+                    </div>
+                    <p class="card-text">${products.description}</p>                
+                </div>
+                </a>
+            </div>
                 `
             }
 
