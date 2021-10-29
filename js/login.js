@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
     }
     document.getElementById("newBtnSubmit").onclick = function () {
         let inputNewUser = document.getElementById("newUser").value;
-        sessionStorage.setItem("newUser", inputNewUser);
+        localStorage.setItem("newUser", inputNewUser);
         let inputNewEmail = document.getElementById("newEmail").value;
-        sessionStorage.setItem("newEmail", inputNewEmail);
+        localStorage.setItem("newEmail", inputNewEmail);
     }
 });

@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", function (e) {
 
     $("#saveData").click(function () {
-        sessionStorage.clear();
+        localStorage.removeItem("inputLogin");
         localStorage.setItem("inputLogin", $("#username").val())
         let names = $("#names").val();
         let surnames = $("#surnames").val();
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         let inputCelular = $("#inputCelular").val();
         let inputEmail = $("#inputEmail").val();
         localStorage.setItem
-        sessionStorage.setItem(userInfo, JSON.stringify({
+        localStorage.setItem(userInfo, JSON.stringify({
             names: names,
             surnames: surnames,
             inputAddress: inputAddress,
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
     let userInfo = "userInfo";
 
-    let saveDataJson = sessionStorage.getItem("userInfo");
+    let saveDataJson = localStorage.getItem("userInfo");
     if (saveDataJson) {
         let saveUser = JSON.parse(saveDataJson)
         $("#names").val(saveUser.names);
@@ -32,8 +32,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
     }
 
     let inputLogin = localStorage.getItem("inputLogin");
-    let newName = sessionStorage.getItem("newUser");
-    let newEmail = sessionStorage.getItem("newEmail")
+    let newName = localStorage.getItem("newUser");
+    let newEmail = localStorage.getItem("newEmail")
     if (inputLogin) {
         $("#username").val(inputLogin)
     } if (newName) {
@@ -44,3 +44,26 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 });
 
+var loadFile = function(event) {
+    var image = document.getElementById('output');
+    image.src = URL.createObjectURL(event.target.files[0]);
+
+    image.addEventListener("load",function(){
+        var imgCanvas = document.createElement("canvas");
+        imgContext = imgCanvas.getContext("2d");
+        imgCanvas.width = image.width;
+        imgCanvas.height = image.height;
+
+        imgContext.drawImage(image, 0, 0, image.width, image.height);
+        var imgAsDataURL = imgCanvas.toDataURL("image/png");
+
+        try {
+            localStorage.setItem("image", imgAsDataURL);
+        }
+        catch (e) {
+            console.log("Storage failed: " + e);
+        }
+    });
+  };
+  let savedImage = localStorage.getItem("image");
+  $("#output").attr('src',savedImage)
