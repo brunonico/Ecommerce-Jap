@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
         let inputAddress = $("#inputAddress").val();
         let inputCelular = $("#inputCelular").val();
         let inputEmail = $("#inputEmail").val();
-        localStorage.setItem
         localStorage.setItem(userInfo, JSON.stringify({
             names: names,
             surnames: surnames,
@@ -67,3 +66,4 @@ var loadFile = function(event) {
   };
   let savedImage = localStorage.getItem("image");
   $("#output").attr('src',savedImage)
+  $("#profileImage").attr('src',savedImage)

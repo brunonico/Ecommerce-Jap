@@ -63,4 +63,14 @@ document.addEventListener("DOMContentLoaded", function (e) {
     localStorage.clear();
     sessionStorage.clear();
   }
+
+  let savedImage = localStorage.getItem("image");
+  $("#profileImage").attr('src',savedImage)
+
+  if (!savedImage){
+    $("#profileImage").attr('src',"img/profile-default.jpg")
+    $("#output").attr('src',"img/profile-default.jpg")
+  }
+
 });
+
