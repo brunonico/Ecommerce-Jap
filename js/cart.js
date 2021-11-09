@@ -89,6 +89,7 @@ function finalCost() {
     let shippingToPay = (total * $("input:checked").val()) / 100;
     let totalToPay = total + shippingToPay;
     $("#totalCostText").html('$ ' + totalToPay);
+    $("#amount-container").html('$ ' + totalToPay)
 }
 
 function getParam() {
@@ -151,3 +152,7 @@ function feedingChart() {
     }
 }
 feedingChart();
+
+$("#makePayment").on("submit", function() {
+    $("#paymentData").html(`<p>¡Datos correctos!</p>`)
+})

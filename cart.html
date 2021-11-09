@@ -87,7 +87,7 @@
       <h2>Mi carrito de compras</h2>
       <p class="lead">Estos son los artículos que seleccionaste</p>
     </div>
-    <hr>  
+    <hr>
 
     <div class="container">
       <div id="kardec" class="row">
@@ -125,8 +125,104 @@
       <label for="contactNumber">Número de contacto</label>
       <input type="text" id="contactNumber" minlength="9" size="10">
 
-    </div>
+      <hr>
+      <h5 class="mb-3">Forma de pago</h5>
 
+      <button type="button" class="btn btn-success mt-2" data-toggle="modal" data-target="#exampleModal">
+        Ingresar
+      </button>
+
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="d-flex justify-content-between">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  <div class="card mb-4">
+                    <div class="card-body">
+
+                      <form action="">
+                        <a class="dark-grey-text d-flex justify-content-between" data-toggle="collapse"
+                          href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+                          Tarjeta de crédito
+                        </a>
+                    </div>
+
+                    <div class="collapse" id="collapseExample1">
+                      <div class="mt-3">
+                        <div class="md-form md-outline mb-0">
+                          <input type="text" id="discount-code1" class="form-control font-weight-light"
+                            placeholder="Ingrese el número de la tarjeta" required>
+                        </div>
+                      </div>
+                      <div class="mt-3">
+                        <div class="md-form md-outline mb-0">
+                          <input type="text" id="discount-code1" class="form-control font-weight-light"
+                            placeholder="Ingrese CVC" required>
+                        </div>
+                      </div>
+                      <div class="mt-3">
+                        <div class="md-form md-outline mb-0">
+                          <input type="date" id="discount-code1" class="form-control font-weight-light"
+                            placeholder="Vencimiento MM/AAAA" required>
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">
+                      Confirmar
+                    </button>
+
+                </h5>
+
+                </form>
+              </div>
+
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  <div class="card mb-4">
+                    <div class="card-body">
+
+
+                      <form action="">
+                        <a class="dark-grey-text d-flex justify-content-between" data-toggle="collapse"
+                          href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+                          Transferencia
+                        </a>
+                    </div>
+                    <div class="collapse" id="collapseExample2">
+                      <div class="mt-3">
+                        <div class="md-form md-outline mb-0">
+                          <input type="text" id="discount-code1" class="form-control font-weight-light"
+                            placeholder="Ingrese el número de cuenta a depositar" required>
+                        </div>
+                      </div>
+                      <div class="mt-3">
+                        <div class="md-form md-outline mb-0">
+                          <input type="text" id="discount-code1" class="form-control font-weight-light"
+                            placeholder="Ingrese su número de cuenta" required>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">
+                      Confirmar
+                    </button>
+                    </form>
+                  </div>
+                </h5>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+      </div>
+    </div>
 
     <hr class="mb-4">
     <div class="container-fluid">
@@ -152,7 +248,7 @@
         </li>
       </ul>
       <hr class="mb-4">
-      <button class="btn btn-primary btn-lg" type="submit" id="completarCompra">Completar compra</button>
+      <button class="btn btn-success btn-lg" type="submit" id="completarCompra">Completar compra</button>
       </form>
     </div>
 
