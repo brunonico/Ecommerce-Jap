@@ -1,10 +1,17 @@
-document.addEventListener("DOMContentLoaded", function (e) {
+ document.addEventListener("DOMContentLoaded", function (e) {
     fetch("https://japdevdep.github.io/ecommerce-api/cart/654.json")
         .then(res => res.json())
         .then(info => {
             let cartArray = info.articles;
             showChart(cartArray)
+        });
+    fetch("http://vocab.nic.in/rest.php/country/json")
+        .then(res => res.json())
+        .then(info => {
+            let countryArray = info.countries;
+            showCountries(countryArray);
         })
+
 });
 
 
@@ -17,7 +24,7 @@ function showChart(cartArray) {
         let convertedValue = conversion(articulo.currency, articulo.unitCost);
         if (getParam() == 1 || getParam() == 1000) {
             cartContent +=
-                `<div class="card border bg-light" style="max-width: 540px;">
+                `<div class="card border bg-light productCard" style="max-width: 540px;">
                     <div class="row g-0">
                         <div class="col-md-4 d-flex flex-wrap align-items-center">
                         <img
@@ -64,10 +71,9 @@ function conversion(currency, cost) {
         return cost;
     }
 }
-$("#shippingText").html($("input:checked").val() + "%");
+finalCost()
 
 $(".custom-control-input").change(function () {
-    $("#shippingText").html($("input:checked").val() + "%");
     finalCost()
 })
 
@@ -87,6 +93,7 @@ function finalCost() {
     }
     document.getElementById("productCostText").innerHTML = '$ ' + total;
     let shippingToPay = (total * $("input:checked").val()) / 100;
+    $("#shippingText").html(shippingToPay);
     let totalToPay = total + shippingToPay;
     $("#totalCostText").html('$ ' + totalToPay);
     $("#amount-container").html('$ ' + totalToPay)
@@ -103,8 +110,15 @@ document.addEventListener("DOMContentLoaded", function (e) {
         .then(rep => rep.json())
         .then(datos => {
             $("#completarCompra").click(function () {
-                alert(datos.msg);
-                window.location.href = "home.html";
+                var addres = $("#address").val();
+                var contactNumber = $("#contactNumber").val();
+                if (addres !== '' && contactNumber !== '') {
+                    alert(datos.msg);
+                    window.location.href = "home.html";
+                }
+                else {
+                    alert("Faltan datos")
+                }
             });
         });
 });
@@ -153,6 +167,35 @@ function feedingChart() {
 }
 feedingChart();
 
-$("#makePayment").on("submit", function() {
-    $("#paymentData").html(`<p>¡Datos correctos!</p>`)
-})
+function showCountries(array) {
+    let optionCountry = "";
+    for (let i = 0; i < array.length; i++) {
+        optionCountry += `<option>${array[i].country.country_name}</option>`
+    }
+    $("#country").append(optionCountry);
+}
+
+$("#completarCompra").hide();
+
+
+$("#cardPaymentComplete").click(function () {
+    var cardNumber = $("#cardNumber").val();
+    var cardCvc = $("#cardCvc").val();
+    var cardExpireDate = $("#cardExpireDate").val();
+
+    if (cardNumber !== '' && cardCvc !== '' && cardExpireDate !== '') {
+        $('#exampleModal').modal('hide');
+        $("#completarCompra").show();
+    }
+});
+
+
+$("#transferPayment").click(function () {
+    var accountUser = $("#accountUser").val();
+    var accountNumber = $("#accountNumber").val();
+
+    if (accountNumber !== '' && accountUser !== '') {
+        $('#exampleModal').modal('hide');
+        $("#completarCompra").show();
+    }
+});

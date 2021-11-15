@@ -57,19 +57,19 @@ function showProducts(arreglo) {
 
                 content +=
                     `
-            <div class="col-md-4">
-                <a href= "product-info.html?cost=` + products.cost + `" class="card mb-4 shadow-sm custom-card">
-                <img class="bd-placeholder-img card-img-top" src="` + products.imgSrc + `" alt="` + products.description + `">
-                <h2 class="m-3">${products.name}</h2>
-                <div class="card-body">
-                    <div class="d-flex w-100 justify-content-between">
-                        <p class="card-text">Precio : ${products.cost} ${products.currency}</p>
-                        <p class="card-text">${products.soldCount} vendidos.</p>
+                    <div class="col-md-4">
+                        <a href= "product-info.html?cost=` + products.cost + `" class="card mb-4 shadow-sm custom-card">
+                        <img class="bd-placeholder-img card-img-top" src="` + products.imgSrc + `" alt="` + products.description + `">
+                        <h2 class="m-3">${products.name}</h2>
+                        <div class="card-body">
+                            <div class="d-flex w-100 justify-content-between">
+                                <p class="card-text">Precio : ${products.cost} ${products.currency}</p>
+                                <p class="card-text">${products.soldCount} vendidos.</p>
+                            </div>
+                            <p class="card-text">${products.description}</p>                
+                        </div>
+                        </a>
                     </div>
-                    <p class="card-text">${products.description}</p>                
-                </div>
-                </a>
-            </div>
                 `
             }
 
